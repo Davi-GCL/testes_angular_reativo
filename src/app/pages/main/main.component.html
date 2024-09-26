@@ -1,0 +1,38 @@
+<h2>Ativos</h2>
+
+<div class="caixa-formulario">
+    <form class="formulario-inclusao" [formGroup]="movimentacaoAtivoForm" (ngSubmit)="formSubmit()">
+        <input type="text" formControlName="ticker" placeholder="Identificador na bolsa">
+        <input type="number" formControlName="valor" placeholder="Preço">
+        <input type="number" formControlName="qtd" placeholder="Qtd">
+        <input type="date" formControlName="dataMovimentacao">
+        <button type="submit">Enviar</button>
+    </form>
+</div>
+
+<ng-container *ngIf="ativosMovimentados$ | async as ativos; else _CarregandoMovimentos">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Ticker</th>
+                <th>Valor Un. R$</th>
+                <th>Qtd.</th>
+                <th>Data Movimentação</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let ativo of ativos" [id]="ativo.id" (dblclick)="selecionarLinha(ativo.id)"
+            [style.cursor]="'pointer'">
+                <td>{{ativo.id}}</td>
+                <td>{{ativo.ticker}}</td>
+                <td>{{ativo.valor}}</td>
+                <td>{{ativo.qtd}}</td>
+                <td>{{ativo.dataMovimentacao | date:"dd/MM/yyyy"}}</td>
+                <td><button (click)="excluirMovimentacao(ativo.id)" title="Excluir">E</button></td>
+            </tr>
+        </tbody>
+    </table>
+</ng-container>
+<ng-template #_CarregandoMovimentos> Carregando...</ng-template>

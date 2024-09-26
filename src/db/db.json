@@ -1,0 +1,31 @@
+{
+  "movimentacao-ativo": [
+    {
+      "id": "1",
+      "ticker": "klbn4",
+      "valor": 4.3,
+      "qtd": 10,
+      "dataMovimentacao": null
+    },
+    {
+      "id": "2f6c",
+      "ticker": "BBSA3",
+      "valor": 27,
+      "qtd": 5
+    },
+    {
+      "ticker": "VALE3",
+      "valor": 59,
+      "qtd": 2,
+      "dataMovimentacao": "2024-09-23",
+      "id": "6842"
+    },
+    {
+      "id": "bd93",
+      "ticker": "CPLE6",
+      "valor": 7.5,
+      "qtd": 5,
+      "dataMovimentacao": "2023-07-24"
+    }
+  ]
+}
