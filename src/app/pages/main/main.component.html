@@ -1,16 +1,17 @@
 <h2>Ativos</h2>
 
 <div class="caixa-formulario">
-    <form class="formulario-inclusao" [formGroup]="movimentacaoAtivoForm" (ngSubmit)="formSubmit()">
-        <input type="text" formControlName="ticker" placeholder="Identificador na bolsa">
+    <h3>Filtro</h3>
+    <form class="formulario-filtro" [formGroup]="filtroForm" (ngSubmit)="filtroFormSubmit()">
+        <input type="text" formControlName="ticker" placeholder="Identificador na bolsa" maxlength="10">
         <input type="number" formControlName="valor" placeholder="Preço">
         <input type="number" formControlName="qtd" placeholder="Qtd">
         <input type="date" formControlName="dataMovimentacao">
-        <button type="submit">Enviar</button>
+        <button type="submit">Filtrar</button>
     </form>
 </div>
 
-<ng-container *ngIf="ativosMovimentados$ | async as ativos; else _CarregandoMovimentos">
+<ng-container *ngIf="ativosMovimentados$ | async as ativos; else CARREGANDO_MOVIMENTOS">
     <table>
         <thead>
             <tr>
@@ -23,16 +24,28 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let ativo of ativos" [id]="ativo.id" (dblclick)="selecionarLinha(ativo.id)"
+            <tr *ngFor="let ativo of ativos | filtroLista: filtroCallback : filtroSelecionado" [id]="ativo.id" (dblclick)="selecionarLinha(ativo.id)"
             [style.cursor]="'pointer'">
                 <td>{{ativo.id}}</td>
                 <td>{{ativo.ticker}}</td>
-                <td>{{ativo.valor}}</td>
+                <td>{{ativo.valor | currency:"BRL":"symbol-narrow":"1.2-2"}}</td>
                 <td>{{ativo.qtd}}</td>
                 <td>{{ativo.dataMovimentacao | date:"dd/MM/yyyy"}}</td>
-                <td><button (click)="excluirMovimentacao(ativo.id)" title="Excluir">E</button></td>
+                <td><button (click)="excluirMovimentacao(ativo.id)" title="Remover">R</button></td>
             </tr>
         </tbody>
     </table>
 </ng-container>
-<ng-template #_CarregandoMovimentos> Carregando...</ng-template>
+
+<ng-template #CARREGANDO_MOVIMENTOS> Carregando...</ng-template>
+
+<div class="caixa-formulario">
+    <h3>Inclusão</h3>
+    <form class="formulario-inclusao" [formGroup]="movimentacaoAtivoForm" (ngSubmit)="formSubmit()">
+        <input type="text" formControlName="ticker" placeholder="Identificador na bolsa" maxlength="10">
+        <input type="number" formControlName="valor" placeholder="Preço">
+        <input type="number" formControlName="qtd" placeholder="Qtd">
+        <input type="date" formControlName="dataMovimentacao">
+        <button type="submit">Enviar</button>
+    </form>
+</div>

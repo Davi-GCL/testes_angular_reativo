@@ -26,6 +26,13 @@
       "valor": 7.5,
       "qtd": 5,
       "dataMovimentacao": "2023-07-24"
+    },
+    {
+      "id": "eac5",
+      "ticker": "NASD11",
+      "valor": 15.1,
+      "qtd": 8,
+      "dataMovimentacao": "2024-09-25T15:07:34.403Z"
     }
   ]
 }
