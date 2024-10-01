@@ -156,4 +156,5 @@ export class MainComponent implements OnInit, OnChanges{
     // if(filtro.ticker) return valor.ticker.includes(filtro.ticker);
     // return false;
   }
+  
 }
